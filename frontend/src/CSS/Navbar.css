@@ -1,0 +1,48 @@
+/* Import the Inter Font */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* Apply the Font Globally */
+body {
+  font-family: "Inter", sans-serif;
+}
+
+.menu-button {
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .menu-button {
+    display: none;
+  }
+  .menu ul {
+    display: flex;
+  }
+}
+
+@media (max-width: 768px) {
+  .menu ul {
+    flex-direction: column;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    background-color: #ffffff;
+    z-index: 50;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    display: none;
+  }
+
+  .menu ul.flex {
+    display: flex;
+  }
+}
+
+/* Hero Section */
+.herosec {
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url("../assets/download.jpeg");
+  background-color: #000; /* Fallback color */
+  background-size: cover;
+  background-position: center;
+}

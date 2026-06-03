@@ -107,39 +107,39 @@ function JobSetup() {
   };
 
   return (
-    <div className="flex items-center justify-center w-screen my-5 ">
+    <div className="flex items-center justify-center w-full min-h-screen py-10 px-4 bg-slate-900">
       <form
         onSubmit={handleSubmit}
-        className="p-8 max-w-4xl border-gray-400 shadow-lg rounded-md"
+        className="p-8 max-w-4xl w-full bg-slate-800/80 backdrop-blur-md border border-slate-700 shadow-2xl rounded-3xl animate-fade-in-up"
       >
-        <div className="flex items-center gap-4 mb-5">
+        <div className="flex items-center justify-between mb-8 border-b border-slate-700 pb-4">
+          <div className="flex items-center gap-4">
+            <Button
+              variant="outline"
+              className="flex items-center gap-2 font-semibold text-slate-300 border-slate-600 hover:bg-slate-700 bg-slate-900 transition-colors"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent form submission
+                navigate(-1);
+              }}
+            >
+              <ArrowLeft className="w-4 h-4" /> <span>Back</span>
+            </Button>
+            <h1 className="text-3xl font-extrabold text-white">Job Setup</h1>
+          </div>
           <Button
             variant="outline"
-            className="flex items-center gap-2 font-semibold text-gray-500"
-            onClick={(e) => {
-              e.preventDefault(); // Prevent form submission
-              navigate(-1);
-            }} // Navigate back
-          >
-            <ArrowLeft />
-            <span>Back</span>
-          </Button>
-
-          <h1 className="text-xl font-bold">Job Setup</h1>
-          <Button
-            variant="outline"
-            className="text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
+            className="text-red-400 border-red-500/30 hover:bg-red-500 hover:text-white transition-colors bg-slate-900"
             onClick={openDeleteModal}
           >
             DELETE
           </Button>
         </div>
 
-        {error && <p className="text-red-700">{error}</p>}
-        <div className="grid grid-cols-2 gap-2">
+        {error && <p className="text-red-400 font-medium mb-6 bg-red-500/10 p-3 rounded-lg border border-red-500/20">{error}</p>}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {Object.keys(input).map((key) => (
             <div key={key}>
-              <Label>{key.charAt(0).toUpperCase() + key.slice(1)}</Label>
+              <Label className="text-slate-300 font-medium">{key.charAt(0).toUpperCase() + key.slice(1)}</Label>
               <Input
                 type={
                   key === "salary" || key === "experience" || key === "position"
@@ -149,15 +149,18 @@ function JobSetup() {
                 name={key}
                 value={input[key]}
                 onChange={changeEventHandler}
-                className="focus-visible:ring-offset-0 focus-visible:ring-0 my-1"
+                className="mt-2 bg-slate-900 border-slate-700 text-slate-200 focus-visible:ring-teal-500 focus-visible:border-teal-500 transition-colors"
                 required
                 disabled={loading}
               />
             </div>
           ))}
         </div>
-        <Button className="w-full mt-4" disabled={loading}>
-          {loading ? "Updating..." : "Update"}
+        <Button 
+          className="w-full mt-8 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-bold hover:from-teal-400 hover:to-emerald-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/25 transition-all border-0 py-6 text-lg rounded-xl" 
+          disabled={loading}
+        >
+          {loading ? "Updating..." : "Update Job"}
         </Button>
       </form>
 
@@ -174,18 +177,30 @@ function JobSetup() {
             bottom: "auto",
             marginRight: "-50%",
             transform: "translate(-50%, -50%)",
+            backgroundColor: "#0f172a", // slate-900
+            border: "1px solid #334155", // slate-700
+            borderRadius: "16px",
+            color: "white",
+            padding: "24px",
+            maxWidth: "400px",
           },
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
+            backdropFilter: "blur(4px)",
+          }
         }}
       >
-        <h2>
-          Are you sure you want to delete this company? <br /> This action will
-          also permanently remove all associated jobs and applications.
+        <h2 className="text-xl font-bold mb-4 text-center">
+          Are you sure you want to delete this job?
         </h2>
-        <div className="flex justify-end gap-4 mt-4">
-          <Button onClick={closeDeleteModal} className="bg-gray-300">
+        <p className="text-slate-400 text-center mb-6">
+          This action will also permanently remove all associated applications.
+        </p>
+        <div className="flex justify-center gap-4 mt-6">
+          <Button onClick={closeDeleteModal} variant="outline" className="bg-slate-800 border-slate-600 text-slate-300 hover:bg-slate-700 hover:text-white">
             Cancel
           </Button>
-          <Button onClick={deleteJob} className="bg-red-600 text-white">
+          <Button onClick={deleteJob} className="bg-red-600 hover:bg-red-500 text-white border-0">
             Delete
           </Button>
         </div>

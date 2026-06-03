@@ -24,6 +24,11 @@ const authSlice = createSlice({
     setToken: (state, action) => {
       state.token = action.payload;
     },
+    setSavedJobs: (state, action) => {
+      if (state.authUser && state.authUser.profile) {
+        state.authUser.profile.savedJobs = action.payload;
+      }
+    },
   },
 });
 
@@ -34,6 +39,7 @@ export const {
   setAuthUser,
   clearAuthUser,
   setToken,
+  setSavedJobs,
 } = authSlice.actions;
 
 // Export the reducer for store configuration

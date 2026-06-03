@@ -107,109 +107,109 @@ function UpdateProfile({ open, setOpen }) {
   return (
     <Dialog open={open} onOpenChange={handleClose}>
       <DialogContent
-        className="sm:max-w-[550px]"
+        className="sm:max-w-[550px] bg-slate-900 border border-slate-700 text-white shadow-2xl"
         onInteractOutside={handleClose}
       >
         <DialogHeader>
-          <DialogTitle>Update Profile</DialogTitle>
+          <DialogTitle className="text-2xl font-bold text-white mb-2">Update Profile</DialogTitle>
         </DialogHeader>
         <form onSubmit={handleSubmit}>
-          <div className="grid gap-4 py-4">
+          <div className="grid gap-5 py-4">
             <div className="grid items-center grid-cols-4 gap-4">
-              <label htmlFor="name">Name</label>
+              <label htmlFor="name" className="text-right text-slate-300 font-medium">Name</label>
               <input
                 type="text"
                 name="name"
                 id="name"
                 value={input.name}
                 onChange={changeEventHandler}
-                className="col-span-3 py-1.5 border-2 border-gray-300 rounded"
+                className="col-span-3 py-2 px-3 bg-slate-800 border-2 border-slate-700 rounded-lg text-white focus:outline-none focus:border-teal-500 transition-colors"
                 placeholder="Enter your name"
               />
             </div>
 
             <div className="grid items-center grid-cols-4 gap-4">
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email" className="text-right text-slate-300 font-medium">Email</label>
               <input
                 type="email"
                 name="email"
                 id="email"
                 value={input.email}
                 onChange={changeEventHandler}
-                className="col-span-3 py-1.5 border-2 border-gray-300 rounded"
+                className="col-span-3 py-2 px-3 bg-slate-800 border-2 border-slate-700 rounded-lg text-white focus:outline-none focus:border-teal-500 transition-colors"
                 placeholder="Enter your email"
               />
             </div>
 
             <div className="grid items-center grid-cols-4 gap-4">
-              <label htmlFor="number">Number</label>
+              <label htmlFor="number" className="text-right text-slate-300 font-medium">Number</label>
               <input
                 type="text"
                 name="number"
                 id="number"
                 value={input.number}
                 onChange={changeEventHandler}
-                className="col-span-3 py-1.5 border-2 border-gray-300 rounded"
+                className="col-span-3 py-2 px-3 bg-slate-800 border-2 border-slate-700 rounded-lg text-white focus:outline-none focus:border-teal-500 transition-colors"
                 placeholder="Enter your phone number"
               />
             </div>
 
             <div className="grid items-center grid-cols-4 gap-4">
-              <label htmlFor="bio">Bio</label>
+              <label htmlFor="bio" className="text-right text-slate-300 font-medium">Bio</label>
               <input
                 type="text"
                 name="bio"
                 id="bio"
                 value={input.bio}
                 onChange={changeEventHandler}
-                className="col-span-3 py-1.5 border-2 border-gray-300 rounded"
+                className="col-span-3 py-2 px-3 bg-slate-800 border-2 border-slate-700 rounded-lg text-white focus:outline-none focus:border-teal-500 transition-colors"
                 placeholder="Tell us about yourself"
               />
             </div>
 
             <div className="grid items-center grid-cols-4 gap-4">
-              <label htmlFor="skills">Skills</label>
+              <label htmlFor="skills" className="text-right text-slate-300 font-medium">Skills</label>
               <input
                 type="text"
                 name="skills"
                 id="skills"
                 value={input.skills}
                 onChange={changeEventHandler}
-                className="col-span-3 py-1.5 border-2 border-gray-300 rounded"
-                placeholder="List your skills"
+                className="col-span-3 py-2 px-3 bg-slate-800 border-2 border-slate-700 rounded-lg text-white focus:outline-none focus:border-teal-500 transition-colors"
+                placeholder="List your skills (comma separated)"
               />
             </div>
 
             <div className="grid items-center grid-cols-4 gap-4">
-              <label htmlFor="file">Resume</label>
+              <label htmlFor="file" className="text-right text-slate-300 font-medium">Resume</label>
               <input
                 type="file"
                 name="file"
                 id="file"
                 onChange={fileChangeHandler}
                 accept="application/pdf"
-                className="col-span-3 py-1.5"
+                className="col-span-3 py-2 px-3 text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-500/10 file:text-teal-400 hover:file:bg-teal-500/20 cursor-pointer"
               />
             </div>
 
             <div className="grid items-center grid-cols-4 gap-4">
-              <label htmlFor="profilePhoto">Profile Photo</label>
+              <label htmlFor="profilePhoto" className="text-right text-slate-300 font-medium">Profile Photo</label>
               <input
                 type="file"
                 name="profilePhoto"
                 id="profilePhoto"
                 onChange={profilePhotoChangeHandler}
                 accept="image/*"
-                className="col-span-3 py-1.5"
+                className="col-span-3 py-2 px-3 text-slate-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-teal-500/10 file:text-teal-400 hover:file:bg-teal-500/20 cursor-pointer"
               />
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" className="w-full my-4" disabled={loading}>
+            <Button type="submit" className="w-full my-4 bg-gradient-to-r from-teal-500 to-emerald-500 text-white hover:from-teal-400 hover:to-emerald-400 border-0" disabled={loading}>
               {loading ? (
                 <Loader2 className="w-4 h-4 mr-2 animate-spin" />
               ) : (
-                "Update"
+                "Update Profile"
               )}
             </Button>
           </DialogFooter>

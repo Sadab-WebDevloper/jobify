@@ -8,6 +8,7 @@ import {
   retriveUser,
   updateProfile,
   verifyOtp,
+  toggleSaveJob,
 } from "../controller/user.controller.js";
 import { auth } from "../middleware/auth.middleware.js";
 import { upload } from "../middleware/multer.js";
@@ -30,5 +31,6 @@ userRouter.get("/me", auth, retriveUser);
 userRouter.post("/forgotPass", forgotPassword);
 userRouter.post("/verifyOtp", verifyOtp);
 userRouter.post("/resetPassword", resetPassword);
+userRouter.post("/saved-jobs/:id", auth, toggleSaveJob);
 
 export default userRouter;

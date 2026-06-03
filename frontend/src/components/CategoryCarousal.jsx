@@ -28,8 +28,8 @@ function CategoryCarousal() {
     }
   };
   return (
-    <div className="relative py-12 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
-      <Carousel className="w-full max-w-xl mx-auto my-10">
+    <div className="relative py-12 animate-fade-in-up bg-slate-900" style={{ animationDelay: '0.5s' }}>
+      <Carousel className="w-full max-w-xl mx-auto my-10 relative z-10">
         <CarouselContent>
           {category.map((cat, index) => (
             <CarouselItem
@@ -38,7 +38,7 @@ function CategoryCarousal() {
             >
               <Button
                 variant="outline"
-                className="rounded-full w-full text-center bg-white hover:bg-gradient-to-r hover:from-primary hover:to-secondary hover:text-white border border-gray-200 shadow-sm transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg font-medium text-gray-700"
+                className="rounded-full w-full text-center bg-slate-800 text-slate-300 border-slate-700 hover:bg-gradient-to-r hover:from-teal-500 hover:to-emerald-500 hover:text-white hover:border-transparent shadow-lg shadow-slate-900/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-teal-500/25 font-medium"
                 onClick={() => searchJobHandler(cat)}
               >
                 {cat}
@@ -47,8 +47,8 @@ function CategoryCarousal() {
           ))}
         </CarouselContent>
         <div className="hidden sm:block">
-          <CarouselPrevious className="bg-white hover:bg-gray-50 border-gray-200 text-primary shadow-md hover:scale-110 transition-transform" />
-          <CarouselNext className="bg-white hover:bg-gray-50 border-gray-200 text-primary shadow-md hover:scale-110 transition-transform" />
+          <CarouselPrevious className="bg-slate-800 text-teal-400 border-slate-700 hover:bg-slate-700 hover:text-teal-300 shadow-md hover:scale-110 transition-transform" />
+          <CarouselNext className="bg-slate-800 text-teal-400 border-slate-700 hover:bg-slate-700 hover:text-teal-300 shadow-md hover:scale-110 transition-transform" />
         </div>
       </Carousel>
     </div>

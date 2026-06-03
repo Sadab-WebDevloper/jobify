@@ -35,11 +35,11 @@ function Jobs() {
   }, [allJobs, searchedQuery]);
 
   return (
-    <div className="max-w-7xl mx-auto mt-4">
+    <div className="max-w-7xl mx-auto mt-4 px-4">
       <div className="flex gap-5">
         {/* Hamburger Button for Mobile */}
         <button
-          className="md:hidden p-2 rounded-md text-gray-600"
+          className="md:hidden p-2 rounded-md text-slate-300 hover:bg-slate-800 transition-colors"
           onClick={toggleFilter}
         >
           {showFilter ? (
@@ -51,14 +51,14 @@ function Jobs() {
 
         {/* Filter Sidebar */}
         <div
-          className={`fixed inset-0 bg-white z-50 p-4 w-[40%]  transition-transform transform ${
+          className={`fixed inset-0 bg-slate-900/95 backdrop-blur-sm z-50 p-4 w-[80%] max-w-[300px] transition-transform transform ${
             showFilter ? "translate-x-0" : "-translate-x-full"
-          } md:relative md:translate-x-0 md:w-[22%] md:block`}
+          } md:relative md:bg-transparent md:translate-x-0 md:w-[22%] md:block md:max-w-none`}
         >
           <FilterCard />
           {/* Close button for mobile */}
           <button
-            className="absolute top-2 right-2 text-gray-500 md:hidden"
+            className="absolute top-4 right-4 text-slate-400 hover:text-white md:hidden"
             onClick={toggleFilter}
           >
             ✕
@@ -67,10 +67,12 @@ function Jobs() {
 
         {/* Job Listing */}
         {filterJobs?.length === 0 ? (
-          <span>Jobs Not Found</span>
+          <div className="flex-1 flex items-center justify-center h-[88vh]">
+            <span className="text-xl font-medium text-slate-400">Jobs Not Found</span>
+          </div>
         ) : (
-          <div className="flex-1 h-[88vh] overflow-y-auto">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-4">
+          <div className="flex-1 h-[88vh] overflow-y-auto pb-10 pr-2 custom-scrollbar">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filterJobs?.map((job) => (
                 <motion.div
                   initial={{ opacity: 0, x: 100 }}
@@ -78,6 +80,7 @@ function Jobs() {
                   exit={{ opacity: 0, x: -100 }}
                   transition={{ duration: 0.3 }}
                   key={job._id}
+                  className="h-full"
                 >
                   <Jobcard job={job} />
                 </motion.div>

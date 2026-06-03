@@ -81,7 +81,10 @@ export const login = async (req, res) => {
     }
 
     // Find user by email
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate({
+      path: "profile.savedJobs",
+      populate: { path: "company" }
+    });
     if (!user) {
       return sendResponse(res, 401, null, "Invalid email or password");
     }
@@ -209,7 +212,12 @@ export const updateProfile = async (req, res) => {
 export const retriveUser = async (req, res) => {
   try {
     const userId = req.userId;
-    const user = await User.findById(userId).select("-password");
+    const user = await User.findById(userId)
+      .select("-password")
+      .populate({
+        path: "profile.savedJobs",
+        populate: { path: "company" }
+      });
 
     if (!user) return res.status(404).send("User not found.");
     return res.status(200).json({ user });
@@ -319,5 +327,44 @@ export const resetPassword = async (req, res) => {
     return sendResponse(res, 200, null, "Password Updated Successfully");
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const toggleSaveJob = async (req, res) => {
+  try {
+    const userId = req.userId;
+    const jobId = req.params.id;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return sendResponse(res, 404, null, "User not found");
+    }
+
+    const isSaved = user.profile.savedJobs.includes(jobId);
+
+    if (isSaved) {
+      // Remove it
+      user.profile.savedJobs = user.profile.savedJobs.filter(id => id.toString() !== jobId);
+    } else {
+      // Add it
+      user.profile.savedJobs.push(jobId);
+    }
+
+    await user.save();
+
+    await user.populate({
+      path: "profile.savedJobs",
+      populate: { path: "company" }
+    });
+
+    return sendResponse(
+      res, 
+      200, 
+      user.profile.savedJobs, 
+      isSaved ? "Job removed from saved items" : "Job saved successfully"
+    );
+  } catch (error) {
+    console.error("Toggle Save Job Error:", error);
+    return sendResponse(res, 500, null, "Internal server error");
   }
 };

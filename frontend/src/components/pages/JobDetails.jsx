@@ -47,77 +47,85 @@ function JobDetails() {
   };
 
   return (
-    <div className="max-w-7xl mx-auto my-10 p-6 bg-white shadow-lg rounded-lg">
-      <div className="flex sm:flex-row justify-between items-start">
-        <div className="flex-1">
+    <div className="max-w-7xl mx-auto my-10 p-6 md:p-10 bg-slate-800/80 backdrop-blur-md shadow-2xl rounded-3xl border border-slate-700 relative overflow-hidden animate-fade-in-up">
+      {/* Decorative gradient blob */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-teal-500/5 rounded-full blur-[100px] -mr-40 -mt-40 pointer-events-none" />
+
+      <div className="flex flex-col md:flex-row justify-between items-start relative z-10">
+        <div className="flex-1 w-full">
           <Button
             onClick={() => navigate(-1)}
-            className="mb-4 bg-gray-700 hover:bg-gray-800 text-white px-4 py-2 rounded-lg"
+            variant="outline"
+            className="mb-6 bg-slate-900 border-slate-700 hover:bg-slate-800 text-slate-300 hover:text-white px-4 py-2 rounded-lg transition-colors"
           >
-            Back
+            ← Back
           </Button>
-          <h1 className="font-bold text-2xl">{singleJob?.title}</h1>
-          <div className="flex flex-wrap items-center gap-2 mt-4">
-            <Badge variant="ghost" className="text-blue-700 font-bold">
+          <h1 className="font-extrabold text-3xl md:text-4xl text-white">{singleJob?.title}</h1>
+          <div className="flex flex-wrap items-center gap-3 mt-6">
+            <Badge className="bg-teal-500/10 text-teal-400 border border-teal-500/20 font-semibold hover:bg-teal-500/20 px-3 py-1 text-sm rounded-md">
               {singleJob?.position} Position
             </Badge>
-            <Badge variant="ghost" className="text-red-700 font-bold">
+            <Badge className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 font-semibold hover:bg-emerald-500/20 px-3 py-1 text-sm rounded-md">
               {singleJob?.salary} LPA
             </Badge>
-            <Badge variant="ghost" className="text-purple-800 font-bold">
+            <Badge className="bg-purple-500/10 text-purple-400 border border-purple-500/20 font-semibold hover:bg-purple-500/20 px-3 py-1 text-sm rounded-md">
               {singleJob?.jobType}
             </Badge>
           </div>
         </div>
-        <div className="mt-4 md:mt-0 md:flex md:justify-end">
+        <div className="mt-6 md:mt-0 w-full md:w-auto md:flex md:justify-end">
           <Button
             disabled={isApplied}
             onClick={!isApplied ? applyJob : undefined}
-            className={`rounded-lg ${
-              isApplied ? "bg-gray-600 cursor-not-allowed" : "bg-red-600"
+            className={`w-full md:w-auto px-8 py-6 text-lg font-bold rounded-xl transition-all shadow-lg ${
+              isApplied 
+                ? "bg-slate-700 text-slate-400 cursor-not-allowed shadow-none" 
+                : "bg-gradient-to-r from-teal-500 to-emerald-500 text-white hover:from-teal-400 hover:to-emerald-400 hover:-translate-y-1 hover:shadow-teal-500/25 border-0"
             }`}
           >
-            {isApplied ? "Applied" : "Apply Now"}
+            {isApplied ? "Already Applied" : "Apply Now"}
           </Button>
         </div>
       </div>
 
-      <div className="mt-6">
-        <h1 className="border-b-2 border-b-gray-200 font-medium py-4 text-lg">
+      <div className="mt-10 relative z-10">
+        <h1 className="border-b border-b-slate-700 font-bold py-4 text-xl text-white">
           Job Description
         </h1>
-        <p className="mt-2 text-gray-700">{singleJob?.description}</p>
+        <p className="mt-4 text-slate-300 leading-relaxed">{singleJob?.description}</p>
 
         {/* Job Requirements Section */}
-        <div className="my-6">
-          <h1 className="font-bold text-lg">Job Requirements</h1>
-          <ul className="list-disc pl-5 mt-2 text-gray-700">
+        <div className="my-8">
+          <h1 className="font-bold text-xl text-white mb-4">Job Requirements</h1>
+          <ul className="list-disc pl-5 space-y-2 text-slate-300">
             {singleJob?.requirements?.map((requirement, index) => (
-              <li key={index}>{requirement}</li>
+              <li key={index} className="leading-relaxed">{requirement}</li>
             ))}
           </ul>
         </div>
 
-        <div className="my-4 space-y-2">
-          {[
-            { label: "Role", value: singleJob?.title },
-            { label: "Location", value: singleJob?.location },
-            { label: "Experience", value: `${singleJob?.experience} years` },
-            { label: "Salary", value: `${singleJob?.salary} LPA` },
-            {
-              label: "Total Applicants",
-              value: singleJob?.application?.length,
-            },
-            {
-              label: "Posted Date",
-              value: singleJob?.createdAt?.split("T")[0],
-            },
-          ].map(({ label, value }) => (
-            <h1 className="font-bold" key={label}>
-              {label}:{" "}
-              <span className="pl-4 font-normal text-gray-800">{value}</span>
-            </h1>
-          ))}
+        <div className="my-8 bg-slate-900/50 p-6 rounded-2xl border border-slate-700">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {[
+              { label: "Role", value: singleJob?.title },
+              { label: "Location", value: singleJob?.location },
+              { label: "Experience", value: `${singleJob?.experience} years` },
+              { label: "Salary", value: `${singleJob?.salary} LPA` },
+              {
+                label: "Total Applicants",
+                value: singleJob?.application?.length,
+              },
+              {
+                label: "Posted Date",
+                value: singleJob?.createdAt?.split("T")[0],
+              },
+            ].map(({ label, value }) => (
+              <div className="flex flex-col sm:flex-row sm:items-center py-2" key={label}>
+                <span className="font-bold text-white sm:w-40">{label}:</span>
+                <span className="font-medium text-slate-400 mt-1 sm:mt-0">{value}</span>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

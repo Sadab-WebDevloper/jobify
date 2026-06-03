@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema(
       trim: true,
     },
     phoneNumber: {
-      type: Number,
+      type: String,
       required: true,
     },
     password: {
@@ -41,6 +41,7 @@ const userSchema = new mongoose.Schema(
         type: String,
         default: "",
       },
+      savedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Job" }],
     },
   },
   { timestamps: true }

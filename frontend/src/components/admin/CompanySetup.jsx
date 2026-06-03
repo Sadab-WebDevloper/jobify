@@ -112,94 +112,94 @@ function CompanySetup() {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-md ">
+    <div className="max-w-3xl mx-auto my-10 p-8 bg-slate-800/80 backdrop-blur-md rounded-3xl shadow-2xl border border-slate-700 animate-fade-in-up">
       <form onSubmit={handleSubmit}>
-        <div className="flex items-center justify-between py-4 border-b mb-6">
-          <h1 className="text-2xl font-bold text-gray-800">Company Setup</h1>
+        <div className="flex items-center justify-between py-4 border-b border-slate-700 mb-8">
+          <h1 className="text-3xl font-extrabold text-white">Company Setup</h1>
           <div className="flex items-center gap-4">
             <Button
               variant="outline"
-              className="text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
+              className="text-red-400 border-red-500/30 hover:bg-red-500 hover:text-white transition-colors bg-slate-900"
               onClick={openDeleteModal}
             >
               DELETE
             </Button>
             <Button
               variant="outline"
-              className="flex items-center gap-2 font-semibold text-gray-600 border-gray-600 hover:bg-gray-200"
+              className="flex items-center gap-2 font-semibold text-slate-300 border-slate-600 hover:bg-slate-700 bg-slate-900 transition-colors"
               onClick={(e) => {
                 e.preventDefault(); // Prevent form submission
                 navigate(-1);
               }}
             >
-              <ArrowLeft />
+              <ArrowLeft className="w-4 h-4" />
               <span>Back</span>
             </Button>
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
-            <Label>Company Name</Label>
+            <Label className="text-slate-300 font-medium">Company Name</Label>
             <Input
               type="text"
               name="name"
               value={input.name}
               onChange={changeEventHandler}
               required
-              className="border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+              className="mt-2 bg-slate-900 border-slate-700 text-slate-200 focus:border-teal-500 focus:ring-teal-500 transition-colors"
             />
           </div>
           <div>
-            <Label>Description</Label>
+            <Label className="text-slate-300 font-medium">Description</Label>
             <Input
               type="text"
               name="description"
               value={input.description}
               onChange={changeEventHandler}
               required
-              className="border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+              className="mt-2 bg-slate-900 border-slate-700 text-slate-200 focus:border-teal-500 focus:ring-teal-500 transition-colors"
             />
           </div>
           <div>
-            <Label>Website</Label>
+            <Label className="text-slate-300 font-medium">Website</Label>
             <Input
               type="text"
               name="website"
               value={input.website}
               onChange={changeEventHandler}
               required
-              className="border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+              className="mt-2 bg-slate-900 border-slate-700 text-slate-200 focus:border-teal-500 focus:ring-teal-500 transition-colors"
             />
           </div>
           <div>
-            <Label>Location</Label>
+            <Label className="text-slate-300 font-medium">Location</Label>
             <Input
               type="text"
               name="location"
               value={input.location}
               onChange={changeEventHandler}
               required
-              className="border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+              className="mt-2 bg-slate-900 border-slate-700 text-slate-200 focus:border-teal-500 focus:ring-teal-500 transition-colors"
             />
           </div>
           <div>
-            <Label>Logo</Label>
+            <Label className="text-slate-300 font-medium">Logo</Label>
             <Input
               type="file"
               accept="image/*"
               onChange={changeFileHandler}
-              className="border-gray-300 rounded-md focus:ring focus:ring-blue-300"
+              className="mt-2 bg-slate-900 border-slate-700 text-slate-300 file:bg-slate-700 file:text-slate-300 file:border-0 file:rounded-md file:px-4 file:py-1 hover:file:bg-slate-600 transition-colors cursor-pointer"
             />
           </div>
         </div>
-        {error && <p className="mt-4 text-red-500">{error}</p>}
+        {error && <p className="mt-4 text-red-400 font-medium">{error}</p>}
         <Button
           type="submit"
-          className="w-full my-8 bg-blue-600 text-white hover:bg-blue-700"
+          className="w-full my-8 bg-gradient-to-r from-teal-500 to-emerald-500 text-white font-bold hover:from-teal-400 hover:to-emerald-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/25 transition-all border-0 py-6 text-lg rounded-xl"
         >
           {loading ? (
             <div className="flex items-center">
-              <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+              <Loader2 className="w-5 h-5 mr-2 animate-spin" />
               Please Wait
             </div>
           ) : (
@@ -221,18 +221,30 @@ function CompanySetup() {
             bottom: "auto",
             marginRight: "-50%",
             transform: "translate(-50%, -50%)",
+            backgroundColor: "#0f172a", // slate-900
+            border: "1px solid #334155", // slate-700
+            borderRadius: "16px",
+            color: "white",
+            padding: "24px",
+            maxWidth: "400px",
           },
+          overlay: {
+            backgroundColor: "rgba(0, 0, 0, 0.75)",
+            backdropFilter: "blur(4px)",
+          }
         }}
       >
-        <h2>
-          Are you sure you want to delete this company? <br /> This action will
-          also permanently remove all associated jobs and applications.
+        <h2 className="text-xl font-bold mb-4 text-center">
+          Are you sure you want to delete this company?
         </h2>
-        <div className="flex justify-end gap-4 mt-4">
-          <Button onClick={closeDeleteModal} className="bg-gray-300">
+        <p className="text-slate-400 text-center mb-6">
+          This action will also permanently remove all associated jobs and applications.
+        </p>
+        <div className="flex justify-center gap-4">
+          <Button onClick={closeDeleteModal} variant="outline" className="bg-slate-800 border-slate-600 text-slate-300 hover:bg-slate-700 hover:text-white">
             Cancel
           </Button>
-          <Button onClick={deleteCompany} className="bg-red-600 text-white">
+          <Button onClick={deleteCompany} className="bg-red-600 hover:bg-red-500 text-white border-0">
             Delete
           </Button>
         </div>

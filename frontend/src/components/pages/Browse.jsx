@@ -18,24 +18,26 @@ function Browse() {
 
   return (
     <>
-      <div className="max-w-7xl mx-auto my-10">
+      <div className="max-w-7xl mx-auto my-10 px-4">
         {allJobs && allJobs?.length > 0 ? (
           <>
-            <h1 className="font-bold text-xl my-10">
-              Search Results ({allJobs?.length})
+            <h1 className="font-extrabold text-2xl my-10 text-white flex items-center gap-2">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">Search Results</span> 
+              <span className="text-slate-500 text-lg">({allJobs?.length})</span>
             </h1>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 ">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {allJobs?.map((job, index) => (
-                <div key={index}>
+                <div key={index} className="h-full">
                   <Jobcard job={job} />
                 </div>
               ))}
             </div>
           </>
         ) : (
-          <>
-            <h1 className="text-center font-bold text-[26px]">NO JOBS FOUND</h1>
-          </>
+          <div className="flex flex-col items-center justify-center min-h-[50vh]">
+            <h1 className="text-center font-bold text-3xl text-slate-300">No Jobs Found</h1>
+            <p className="text-slate-500 mt-2">Try adjusting your search criteria</p>
+          </div>
         )}
       </div>
     </>

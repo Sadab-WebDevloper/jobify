@@ -85,49 +85,49 @@ function Applicantstable() {
   };
 
   return (
-    <>
+    <div className="overflow-hidden rounded-xl border border-slate-700 shadow-sm bg-slate-900/50 mt-6 max-w-7xl mx-auto">
       <Table>
-        <TableCaption className="font-bold">
+        <TableCaption className="font-medium text-slate-400 pb-4">
           {localApplicants ? "A List Of Applicants" : "No Applicant Yet"}
         </TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Fullname</TableHead>
-            <TableHead>Email</TableHead>
-            <TableHead>Phone Number</TableHead>
-            <TableHead>Resume</TableHead>
-            <TableHead>Date</TableHead>
-            <TableHead className="text-center">Action</TableHead>
+        <TableHeader className="bg-slate-800/80">
+          <TableRow className="border-b border-slate-700 hover:bg-slate-800">
+            <TableHead className="font-semibold text-slate-300">Fullname</TableHead>
+            <TableHead className="font-semibold text-slate-300">Email</TableHead>
+            <TableHead className="font-semibold text-slate-300">Phone Number</TableHead>
+            <TableHead className="font-semibold text-slate-300">Resume</TableHead>
+            <TableHead className="font-semibold text-slate-300">Date</TableHead>
+            <TableHead className="text-center font-semibold text-slate-300">Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {localApplicants?.map((a) => (
-            <tr key={a._id}>
-              <TableCell>{a.applicant.fullname}</TableCell>
-              <TableCell>{a.applicant.email}</TableCell>
-              <TableCell>{a.applicant.phoneNumber}</TableCell>
+            <tr key={a._id} className="hover:bg-slate-800/50 transition-colors border-b border-slate-800">
+              <TableCell className="text-white font-medium">{a.applicant.fullname}</TableCell>
+              <TableCell className="text-slate-300">{a.applicant.email}</TableCell>
+              <TableCell className="text-slate-300">{a.applicant.phoneNumber}</TableCell>
               <TableCell>
                 {a.applicant.profile.resumeOrignalName ? (
                   <a
-                    className="text-blue-600 cursor-pointer"
+                    className="text-teal-400 hover:text-emerald-400 cursor-pointer underline hover:no-underline transition-colors"
                     href={a.applicant.profile.resume}
                   >
                     {a.applicant.profile.resumeOrignalName}
                   </a>
                 ) : (
-                  <>NA</>
+                  <span className="text-slate-500">NA</span>
                 )}
               </TableCell>
-              <TableCell>{a.applicant.createdAt.split("T")[0]}</TableCell>
+              <TableCell className="text-slate-400">{a.applicant.createdAt.split("T")[0]}</TableCell>
               <TableCell>
                 <div className="font-bold capitalize flex items-center justify-evenly">
                   <p
-                    className={`text-[14px] p-2 ${
+                    className={`text-xs px-3 py-1 rounded-full font-bold shadow-sm ${
                       a.status === "accepted"
-                        ? "bg-green-700 text-white"
+                        ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
                         : a.status === "pending"
-                        ? "bg-gray-600 text-white"
-                        : "bg-red-500 text-white"
+                        ? "bg-amber-500/10 text-amber-400 border border-amber-500/20"
+                        : "bg-red-500/10 text-red-400 border border-red-500/20"
                     }`}
                   >
                     {a.status}
@@ -135,28 +135,28 @@ function Applicantstable() {
 
                   <Popover>
                     <PopoverTrigger>
-                      <MoreHorizontalIcon />
+                      <div className="p-2 hover:bg-slate-700 rounded-full transition-colors inline-block cursor-pointer">
+                        <MoreHorizontalIcon className="text-slate-400 w-5 h-5" />
+                      </div>
                     </PopoverTrigger>
-                    <PopoverContent className="p-4 bg-white rounded-md shadow-md">
+                    <PopoverContent className="p-2 bg-slate-800 border-slate-700 rounded-md shadow-xl text-slate-200 w-36">
                       {loading ? (
-                        <div className="flex items-center justify-center">
-                          <p className="text-gray-600">Loading...</p>
+                        <div className="flex items-center justify-center py-2">
+                          <p className="text-slate-400 text-sm">Loading...</p>
                         </div>
                       ) : (
-                        <div className="flex items-center gap-2 cursor-pointer">
-                          <div className="text-center flex  capitalize font-bold gap-2">
-                            {shortListingStatus.map((s, index) => (
-                              <div
-                                key={index}
-                                onClick={() => statusHandler(s, a._id)}
-                                className="flex flex-col"
-                              >
-                                <span className="border border-gray-300 p-2 rounded-md transition duration-200 hover:bg-gray-100 cursor-pointer">
-                                  {s}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
+                        <div className="flex flex-col gap-1 w-full">
+                          {shortListingStatus.map((s, index) => (
+                            <div
+                              key={index}
+                              onClick={() => statusHandler(s, a._id)}
+                              className={`p-2 rounded-md transition-colors cursor-pointer text-sm font-semibold flex items-center gap-2 ${
+                                s === "accepted" ? "hover:bg-emerald-500/20 text-emerald-400" : "hover:bg-red-500/20 text-red-400"
+                              }`}
+                            >
+                              <span>{s}</span>
+                            </div>
+                          ))}
                         </div>
                       )}
                     </PopoverContent>
@@ -164,7 +164,7 @@ function Applicantstable() {
 
                   <Button
                     variant="outline"
-                    className="text-red-600 border-red-600 hover:bg-red-600 hover:text-white"
+                    className="text-red-400 border-red-500/30 hover:bg-red-500 hover:text-white transition-colors bg-slate-900 h-8 text-xs"
                     onClick={openDeleteModal}
                   >
                     DELETE
@@ -183,19 +183,29 @@ function Applicantstable() {
                     bottom: "auto",
                     marginRight: "-50%",
                     transform: "translate(-50%, -50%)",
+                    backgroundColor: "#0f172a", // slate-900
+                    border: "1px solid #334155", // slate-700
+                    borderRadius: "16px",
+                    color: "white",
+                    padding: "24px",
+                    maxWidth: "400px",
                   },
+                  overlay: {
+                    backgroundColor: "rgba(0, 0, 0, 0.75)",
+                    backdropFilter: "blur(4px)",
+                  }
                 }}
               >
-                <h2>
-                  Are you sure you want to delete this ? <br /> This
+                <h2 className="text-xl font-bold mb-4 text-center">
+                  Are you sure you want to delete this applicant?
                 </h2>
-                <div className="flex justify-end gap-4 mt-4">
-                  <Button onClick={closeDeleteModal} className="bg-gray-300">
+                <div className="flex justify-center gap-4 mt-6">
+                  <Button onClick={closeDeleteModal} variant="outline" className="bg-slate-800 border-slate-600 text-slate-300 hover:bg-slate-700 hover:text-white">
                     Cancel
                   </Button>
                   <Button
                     onClick={() => deleteApplicant(a._id)}
-                    className="bg-red-600 text-white"
+                    className="bg-red-600 hover:bg-red-500 text-white border-0"
                   >
                     Delete
                   </Button>
@@ -205,7 +215,7 @@ function Applicantstable() {
           ))}
         </TableBody>
       </Table>{" "}
-    </>
+    </div>
   );
 }
 

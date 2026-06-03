@@ -15,35 +15,35 @@ function AppliedJobTable() {
   const { allAppliedJobs } = useSelector((store) => store.job);
 
   return (
-    <div className="overflow-hidden rounded-xl border border-gray-100 shadow-sm bg-white">
+    <div className="overflow-hidden rounded-xl border border-slate-700 shadow-sm bg-slate-900/50">
       <Table>
-        <TableCaption className="font-medium text-gray-500 pb-4">
+        <TableCaption className="font-medium text-slate-400 pb-4">
           {allAppliedJobs?.length <= 0
             ? "You Haven't Applied For Any Jobs Yet"
             : "A List Of Your Applied Jobs"}
         </TableCaption>
-        <TableHeader className="bg-gray-50/80">
-          <TableRow>
-            <TableHead className="font-semibold text-gray-700">Job Role</TableHead>
-            <TableHead className="font-semibold text-gray-700">Company</TableHead>
-            <TableHead className="font-semibold text-gray-700">Date</TableHead>
-            <TableHead className="font-semibold text-gray-700 text-right">Status</TableHead>
+        <TableHeader className="bg-slate-800/80">
+          <TableRow className="border-b border-slate-700 hover:bg-slate-800">
+            <TableHead className="font-semibold text-slate-300">Job Role</TableHead>
+            <TableHead className="font-semibold text-slate-300">Company</TableHead>
+            <TableHead className="font-semibold text-slate-300">Date</TableHead>
+            <TableHead className="font-semibold text-slate-300 text-right">Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {allAppliedJobs.map((item, index) => (
-            <TableRow key={index} className="hover:bg-gray-50/80 transition-colors">
-              <TableCell className="font-medium text-gray-900">{item?.job?.title}</TableCell>
-              <TableCell className="text-gray-600"> {item?.job?.company?.name} </TableCell>
-              <TableCell className="text-gray-500">{item?.createdAt.split("T")[0]}</TableCell>
+            <TableRow key={index} className="hover:bg-slate-800/50 transition-colors border-b border-slate-800">
+              <TableCell className="font-medium text-white">{item?.job?.title}</TableCell>
+              <TableCell className="text-slate-300"> {item?.job?.company?.name} </TableCell>
+              <TableCell className="text-slate-400">{item?.createdAt.split("T")[0]}</TableCell>
               <TableCell className="text-right">
                 <Badge
                   className={`border-none shadow-sm font-medium ${
                     item.status === "rejected"
-                      ? "bg-red-100 text-red-700 hover:bg-red-200"
+                      ? "bg-red-500/10 text-red-400 hover:bg-red-500/20"
                       : item.status === "accepted"
-                      ? "bg-green-100 text-green-700 hover:bg-green-200"
-                      : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                      ? "bg-emerald-500/10 text-emerald-400 hover:bg-emerald-500/20"
+                      : "bg-slate-500/10 text-slate-300 hover:bg-slate-500/20"
                   }`}
                 >
                   {item?.status.toUpperCase()}

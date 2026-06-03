@@ -229,9 +229,13 @@ export const Signup = () => {
                           <button
                             type="button"
                             onClick={() => setShowDropdown(!showDropdown)}
-                            className="flex items-center justify-center h-[42px] px-3 border border-r-0 border-slate-700 rounded-l-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-500"
+                            className="flex items-center justify-center h-[42px] px-3 border border-r-0 border-slate-700 rounded-l-xl bg-slate-800 text-white hover:bg-slate-700 transition-colors focus:outline-none focus:ring-2 focus:ring-teal-500"
                           >
-                            <span className="mr-1 text-lg">{countryData.find(c => c.code === input.countryCode)?.flag}</span>
+                            <img 
+                              src={`https://flagcdn.com/w20/${input.countryCode.toLowerCase()}.png`} 
+                              alt={input.countryCode}
+                              className="w-5 mr-2"
+                            />
                             <span className="text-xs font-medium text-slate-300">{countryData.find(c => c.code === input.countryCode)?.dialCode}</span>
                             <span className="ml-1 text-[10px] text-slate-500">▼</span>
                           </button>
@@ -245,7 +249,7 @@ export const Signup = () => {
                                   <input 
                                     type="text" 
                                     placeholder="Search country..." 
-                                    className="w-full px-3 py-2 text-sm border border-slate-700 rounded-lg bg-slate-800 focus:outline-none focus:border-purple-500 text-white placeholder-slate-500"
+                                    className="w-full px-3 py-2 text-sm border border-slate-700 rounded-lg bg-slate-800 focus:outline-none focus:border-teal-500 text-white placeholder-slate-500"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     onClick={(e) => e.stopPropagation()}
@@ -262,7 +266,11 @@ export const Signup = () => {
                                         setSearchQuery("");
                                       }}
                                     >
-                                      <span className="mr-3 text-xl">{country.flag}</span>
+                                      <img 
+                                        src={`https://flagcdn.com/w20/${country.code.toLowerCase()}.png`} 
+                                        alt={country.name}
+                                        className="w-5 mr-3"
+                                      />
                                       <span className="flex-1 text-sm">{country.name}</span>
                                       <span className="text-sm text-slate-400">{country.dialCode}</span>
                                     </div>
@@ -325,7 +333,7 @@ export const Signup = () => {
                         name={field}
                         value={input[field]}
                         onChange={handleChange}
-                        className={`w-full h-[50px] pl-10 px-4 text-white border-slate-700 rounded-xl focus:outline-none focus:ring-2 bg-slate-800 placeholder:text-slate-500 ${
+                        className={`w-full h-[42px] pl-10 pr-4 text-sm text-white border-slate-700 rounded-xl focus:outline-none focus:ring-2 bg-slate-800 placeholder:text-slate-500 ${
                           input.role === "recruiter" ? "focus:ring-purple-500 focus:border-purple-500" : "focus:ring-teal-500 focus:border-teal-500"
                         }`}
                       />

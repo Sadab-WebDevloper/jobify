@@ -12,7 +12,7 @@ const partners = [
 
 const OurPartnersSection = () => {
   return (
-    <div className="bg-gray-100 py-16 px-6 md:px-16">
+    <div className="py-16 px-6 md:px-16">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
         Our <span className="text-[#F83002]">Partners</span>
       </h2>

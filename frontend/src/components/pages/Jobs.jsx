@@ -36,18 +36,19 @@ function Jobs() {
 
   return (
     <div className="max-w-7xl mx-auto mt-4 px-4">
-      <div className="flex gap-5">
-        {/* Hamburger Button for Mobile */}
+      {/* Mobile Filter Toggle */}
+      <div className="md:hidden mb-4 flex justify-between items-center bg-slate-800/50 p-3 rounded-xl border border-slate-700/50">
+        <h2 className="text-white font-bold text-lg">Job Listings</h2>
         <button
-          className="md:hidden p-2 rounded-md text-slate-300 hover:bg-slate-800 transition-colors"
+          className="flex items-center gap-2 bg-teal-500/10 text-teal-400 hover:bg-teal-500/20 px-4 py-2 rounded-lg font-medium transition-colors border border-teal-500/20"
           onClick={toggleFilter}
         >
-          {showFilter ? (
-            <XIcon className="w-6 h-6" />
-          ) : (
-            <MenuIcon className="w-6 h-6" />
-          )}
+          <MenuIcon className="w-5 h-5" />
+          <span>Filters</span>
         </button>
+      </div>
+
+      <div className="flex flex-col md:flex-row gap-5">
 
         {/* Filter Sidebar */}
         <div

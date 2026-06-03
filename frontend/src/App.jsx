@@ -15,7 +15,7 @@ import CreateAdminJob from "./components/admin/CreateAdminJob";
 import Applicants from "./components/admin/Applicants";
 import NotFound from "./components/NotFound";
 import ProtectedRoute from "./components/admin/ProtectedRoute";
-import AuthRedirect from "./components/auth/AuthRedirect"; // Import the new AuthRedirect component
+import AuthRedirect from "./components/auth/AuthRedirect";
 import JobSetup from "./components/admin/JobSetup";
 import { ForAllHomePage } from "./components/pages/ForAllHomePage";
 import HomeRecruiter from "./components/admin/RecHome";
@@ -23,20 +23,37 @@ import ForgotPassword from "./components/auth/ForgotPass";
 import { NewPassword } from "./components/auth/NewPassword";
 import MeHomePage from "./components/me/MeHomePage";
 
+// New Legal Pages
+import PrivacyPolicy from "./components/pages/PrivacyPolicy";
+import TermsOfService from "./components/pages/TermsOfService";
+import CookiePolicy from "./components/pages/CookiePolicy";
+
 const appRouter = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { path: "/", element: <ForAllHomePage /> },
-      { path: "/studenthome", element: <Home /> },
+      { path: "/", element: <AuthRedirect component={<ForAllHomePage />} /> },
+      { path: "/student/home", element: <Home /> },
       {
         path: "/me",
         element: <MeHomePage />,
       },
       {
-        path: "/recHome",
+        path: "/recruiter/home",
         element: <HomeRecruiter />,
+      },
+      {
+        path: "/privacy",
+        element: <PrivacyPolicy />,
+      },
+      {
+        path: "/terms",
+        element: <TermsOfService />,
+      },
+      {
+        path: "/cookie-policy",
+        element: <CookiePolicy />,
       },
       {
         path: "/forgotPass",

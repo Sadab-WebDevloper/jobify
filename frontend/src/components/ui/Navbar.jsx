@@ -66,9 +66,9 @@ export const Navbar = () => {
 
   const handleLogo = () => {
     if (authUser && role === "recruiter") {
-      navigate("/recHome");
+      navigate("/recruiter/home");
     } else if (authUser && role === "student") {
-      navigate("/studenthome");
+      navigate("/student/home");
     } else {
       navigate("/");
     }
@@ -84,7 +84,7 @@ export const Navbar = () => {
         </h1>
 
         {/* Menu and Buttons */}
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-3 md:gap-6">
           {/* Toggle Button for Mobile */}
           <button
             className="lg:hidden text-slate-300 focus:outline-none"
@@ -102,7 +102,7 @@ export const Navbar = () => {
             {role === "student" && (
               <>
                 <li onClick={() => setIsMenuOpen(false)}>
-                  <Link to="/studentHome" className="hover:text-teal-400 transition-colors">Home</Link>
+                  <Link to="/student/home" className="hover:text-teal-400 transition-colors">Home</Link>
                 </li>
                 <li onClick={() => setIsMenuOpen(false)}>
                   <Link to="/jobs" className="hover:text-teal-400 transition-colors">Jobs</Link>
@@ -180,17 +180,17 @@ export const Navbar = () => {
                 </PopoverContent>
               </Popover>
             ) : (
-              <div className="flex gap-3">
+              <div className="flex gap-2 sm:gap-3">
                 <Link to="/login">
                   <Button
                     variant="outline"
-                    className="border-slate-700 text-slate-300 bg-transparent hover:text-white hover:border-slate-500 hover:bg-slate-800 font-semibold transition-all"
+                    className="border-slate-700 text-slate-300 bg-transparent hover:text-white hover:border-slate-500 hover:bg-slate-800 font-semibold transition-all px-3 sm:px-4 text-xs sm:text-sm h-9 sm:h-10"
                   >
                     Log In
                   </Button>
                 </Link>
                 <Link to="/signup">
-                  <Button className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white shadow-lg shadow-teal-500/20 font-semibold transition-all border-0">
+                  <Button className="bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-400 hover:to-emerald-400 text-white shadow-lg shadow-teal-500/20 font-semibold transition-all border-0 px-3 sm:px-4 text-xs sm:text-sm h-9 sm:h-10">
                     Sign Up
                   </Button>
                 </Link>

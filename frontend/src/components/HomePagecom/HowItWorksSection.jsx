@@ -1,32 +1,32 @@
 import React from "react";
 
-const HowItWorksSection = () => {
-  const steps = [
-    {
-      step: 1,
-      title: "Sign Up",
-      description: "Create an account to get started.",
-    },
-    {
-      step: 2,
-      title: "Post or Apply",
-      description: "Post jobs or apply for them easily.",
-    },
-    {
-      step: 3,
-      title: "Get Connected",
-      description: "Collaborate and grow your network.",
-    },
-  ];
+const DEFAULT_STEPS = [
+  {
+    step: 1,
+    title: "Sign Up",
+    description: "Create an account to get started.",
+  },
+  {
+    step: 2,
+    title: "Post or Apply",
+    description: "Post jobs or apply for them easily.",
+  },
+  {
+    step: 3,
+    title: "Get Connected",
+    description: "Collaborate and grow your network.",
+  },
+];
 
+const HowItWorksSection = ({ steps = DEFAULT_STEPS }) => {
   return (
-    <div className="bg-[white]py-16 px-6 md:px-16">
+    <div className="py-16 px-6 md:px-16">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
         How It Works
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
         {steps.map((step) => (
-          <div key={step.step} className="bg-white rounded-lg shadow-lg p-6">
+          <div key={step.step} className="bg-white text-gray-900 rounded-lg shadow-lg p-6">
             <div className="bg-[#431692] text-white w-12 h-12 flex items-center justify-center rounded-full mx-auto mb-4">
               {step.step}
             </div>

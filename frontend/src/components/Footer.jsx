@@ -31,18 +31,21 @@ function Footer() {
           <div className="flex flex-col items-center md:items-start space-y-3">
             <h3 className="text-white font-semibold mb-2">Legal</h3>
             <span
+              onClick={() => navigate("/privacy")}
               className="text-slate-400 hover:text-teal-400 transition duration-300 ease-in-out cursor-pointer hover:underline"
               role="link"
             >
               Privacy Policy
             </span>
             <span
+              onClick={() => navigate("/terms")}
               className="text-slate-400 hover:text-teal-400 transition duration-300 ease-in-out cursor-pointer hover:underline"
               role="link"
             >
               Terms of Service
             </span>
             <span
+              onClick={() => navigate("/cookie-policy")}
               className="text-slate-400 hover:text-teal-400 transition duration-300 ease-in-out cursor-pointer hover:underline"
               role="link"
             >
@@ -99,7 +102,7 @@ function Footer() {
             All rights reserved.
           </p>
           <p className="text-center md:text-right mt-4 md:mt-0 flex items-center gap-1">
-            Designed with <span className="text-red-500 animate-pulse">♥</span> by{" "}
+            Designed & Developed by {" "}
             <span className="font-bold text-slate-300">Sadab Mamu</span>.
           </p>
         </div>

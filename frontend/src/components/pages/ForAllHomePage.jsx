@@ -5,10 +5,11 @@ import HeroSection from "../HomePagecom/Herosec";
 import HowItWorksSection from "../HomePagecom/HowItWorksSection";
 import JobCategoriesSection from "../HomePagecom/JobCategoriesSection";
 import NewsletterSection from "../HomePagecom/NewsletterSection";
-import OurPartnersSection from "../HomePagecom/OurPartnersSection";
-import TestimonialsSection from "../HomePagecom/Testimonial";
+import useGetAllJobs from "../../hooks/useGetAllJobs";
 
 export const ForAllHomePage = () => {
+  useGetAllJobs();
+
   return (
     <>
       <HeroSection />
@@ -16,9 +17,6 @@ export const ForAllHomePage = () => {
       <HowItWorksSection />
       <JobCategoriesSection />
       <FeaturedJobsSection />
-      <OurPartnersSection />
-      <TestimonialsSection />
-
       <NewsletterSection />
       <FAQSection />
     </>

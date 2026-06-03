@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const faqs = [
+const DEFAULT_FAQS = [
   {
     question: "How do I apply for jobs?",
     answer:
@@ -18,7 +18,7 @@ const faqs = [
   },
 ];
 
-const FAQSection = () => {    
+const FAQSection = ({ faqs = DEFAULT_FAQS }) => {    
   const [activeIndex, setActiveIndex] = useState(null);
 
   const toggleFAQ = (index) => {
@@ -26,7 +26,7 @@ const FAQSection = () => {
   };
 
   return (
-    <div className="bg-gray-100 py-16 px-6 md:px-16">
+    <div className="bg-gray-100 text-gray-900 py-16 px-6 md:px-16">
       <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
         Frequently Asked <span className="text-[#F83002]">Questions</span>
       </h2>
@@ -53,11 +53,19 @@ const FAQSection = () => {
               </span>
             </div>
             {/* Answer */}
-            {activeIndex === index && (
-              <div className="px-6 pb-6 text-gray-600">
-                <p>{faq.answer}</p>
+            <div
+              className={`grid transition-all duration-300 ease-in-out ${
+                activeIndex === index
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0"
+              }`}
+            >
+              <div className="overflow-hidden">
+                <div className="px-6 pb-6 text-gray-600">
+                  <p>{faq.answer}</p>
+                </div>
               </div>
-            )}
+            </div>
           </div>
         ))}
       </div>

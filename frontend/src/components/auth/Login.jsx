@@ -71,7 +71,7 @@ export const Login = () => {
       setTimeout(
         () =>
           navigate(
-            res.data.user.role === "recruiter" ? "/recHome" : "/studenthome"
+            res.data.user.role === "recruiter" ? "/recruiter/home" : "/student/home"
           ),
         1000
       );

@@ -20,6 +20,7 @@ import JobSetup from "./components/admin/JobSetup";
 import { ForAllHomePage } from "./components/pages/ForAllHomePage";
 import HomeRecruiter from "./components/admin/RecHome";
 import ForgotPassword from "./components/auth/ForgotPass";
+import HomeProtectedRoute from "./components/admin/HomeProtectedRoute";
 import { NewPassword } from "./components/auth/NewPassword";
 import MeHomePage from "./components/me/MeHomePage";
 
@@ -34,14 +35,25 @@ const appRouter = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "/", element: <AuthRedirect component={<ForAllHomePage />} /> },
-      { path: "/student/home", element: <Home /> },
+      {
+        path: "/student/home",
+        element: (
+          <HomeProtectedRoute role="student">
+            <Home />
+          </HomeProtectedRoute>
+        ),
+      },
       {
         path: "/me",
         element: <MeHomePage />,
       },
       {
         path: "/recruiter/home",
-        element: <HomeRecruiter />,
+        element: (
+          <HomeProtectedRoute role="recruiter">
+            <HomeRecruiter />
+          </HomeProtectedRoute>
+        ),
       },
       {
         path: "/privacy",

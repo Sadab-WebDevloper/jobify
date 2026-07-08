@@ -24,6 +24,9 @@ export const auth = async (req, res, next) => {
     next();
   } catch (error) {
     console.error("Authentication Error:", error);
+    if (error.name === 'TokenExpiredError' || error.name === 'JsonWebTokenError') {
+      return sendResponse(res, 401, "", "Token expired or invalid");
+    }
     return sendResponse(res, 500, "", "Internal Server Error"); // Send a generic error response
   }
 };

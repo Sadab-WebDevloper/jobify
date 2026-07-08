@@ -1,4 +1,6 @@
 import axios from "axios";
+import { store } from "../redux/store.js";
+import { setAuthUser, setToken } from "../redux/authSlice.js";
 
 const BASEURI = "http://localhost:8000/api/v1/";
 
@@ -6,6 +8,20 @@ const apiClient = axios.create({
   baseURL: BASEURI,
   withCredentials: true,
 });
+
+// Add an interceptor to globally handle 401 Unauthorized responses
+apiClient.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      // Clear the user state when token expires
+      store.dispatch(setAuthUser(null));
+      store.dispatch(setToken(""));
+      // The HomeProtectedRoute or AuthRedirect component will automatically navigate to /login
+    }
+    return Promise.reject(error);
+  }
+);
 
 /**
  * Utility function to make API requests.

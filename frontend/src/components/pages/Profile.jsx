@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Contact, Mail, Pen } from "lucide-react";
@@ -102,10 +102,12 @@ function Profile() {
         <AppliedJobTable />
       </div>
 
-      <div className="max-w-4xl mx-auto bg-slate-800/80 backdrop-blur-md rounded-3xl shadow-xl border border-slate-700 p-8 mt-10 mb-10 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-        <h1 className="mb-6 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">Saved Jobs</h1>
-        <SavedJobTable />
-      </div>
+      {authUser?.profile?.savedJobs && authUser.profile.savedJobs.length > 0 && (
+        <div className="max-w-4xl mx-auto bg-slate-800/80 backdrop-blur-md rounded-3xl shadow-xl border border-slate-700 p-8 mt-10 mb-10 animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+          <h1 className="mb-6 text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-emerald-400">Saved Jobs</h1>
+          <SavedJobTable />
+        </div>
+      )}
 
       <UpdateProfile open={open} setOpen={setOpen} />
     </div>

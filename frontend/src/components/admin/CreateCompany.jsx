@@ -58,7 +58,7 @@ function CreateCompany() {
           <div className="flex flex-col sm:flex-row items-center gap-4 mt-10 justify-center">
             <Button
               variant="outline"
-              onClick={() => navigate("/admin/companies")}
+              onClick={() => navigate("/recruiter/home")}
               className="w-full sm:w-auto px-8 py-6 text-lg font-bold bg-slate-800 text-slate-300 border-slate-600 hover:bg-slate-700 hover:text-white transition-colors rounded-xl"
             >
               Cancel

@@ -4,7 +4,7 @@ import Jobcard from "../Jobcard";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 import useGetAllJobs from "../../hooks/useGetAllJobs";
-import { MenuIcon, XIcon } from "lucide-react";
+import { MenuIcon } from "lucide-react";
 import useDocumentTitle from "../../hooks/useDocumentTitle";
 function Jobs() {
   useDocumentTitle("Jobs");
@@ -50,29 +50,39 @@ function Jobs() {
 
       <div className="flex flex-col md:flex-row gap-5">
 
+        {/* Mobile Filter Overlay */}
+        {showFilter && (
+          <div 
+            className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 md:hidden"
+            onClick={toggleFilter}
+          />
+        )}
+
         {/* Filter Sidebar */}
         <div
-          className={`fixed inset-0 bg-slate-900/95 backdrop-blur-sm z-50 p-4 w-[80%] max-w-[300px] transition-transform transform ${
+          className={`fixed inset-y-0 left-0 bg-slate-900 z-50 p-4 w-[85%] max-w-[320px] transition-transform transform overflow-y-auto ${
             showFilter ? "translate-x-0" : "-translate-x-full"
-          } md:relative md:bg-transparent md:translate-x-0 md:w-[22%] md:block md:max-w-none`}
+          } md:relative md:bg-transparent md:translate-x-0 md:w-[22%] md:block md:max-w-none md:p-0 md:overflow-visible md:z-0`}
         >
-          <FilterCard />
-          {/* Close button for mobile */}
-          <button
-            className="absolute top-4 right-4 text-slate-400 hover:text-white md:hidden"
-            onClick={toggleFilter}
-          >
-            ✕
-          </button>
+          <div className="relative h-full">
+            <FilterCard />
+            {/* Close button for mobile */}
+            <button
+              className="absolute top-2 right-2 z-[60] text-slate-400 hover:text-white hover:bg-slate-700 bg-slate-800 border border-slate-600 rounded-full w-8 h-8 flex items-center justify-center shadow-lg md:hidden"
+              onClick={toggleFilter}
+            >
+              ✕
+            </button>
+          </div>
         </div>
 
         {/* Job Listing */}
         {filterJobs?.length === 0 ? (
-          <div className="flex-1 flex items-center justify-center h-[88vh]">
+          <div className="flex-1 flex items-center justify-center min-h-[50vh]">
             <span className="text-xl font-medium text-slate-400">Jobs Not Found</span>
           </div>
         ) : (
-          <div className="flex-1 h-[88vh] overflow-y-auto pb-10 pr-2 custom-scrollbar">
+          <div className="flex-1 pb-10">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {filterJobs?.map((job) => (
                 <motion.div

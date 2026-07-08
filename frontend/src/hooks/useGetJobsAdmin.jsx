@@ -7,7 +7,7 @@ import { setApiLoading } from "../redux/authSlice";
 
 function useGetJobsAdmin() {
   const dispatch = useDispatch();
-  const { authUser, token } = useSelector((store) => store.auth); // Get token from auth state
+  const { token } = useSelector((store) => store.auth); // Get token from auth state
 
   useEffect(() => {
     const fetchJobsAdmin = async () => {
@@ -27,10 +27,10 @@ function useGetJobsAdmin() {
         dispatch(setApiLoading(false));
       }
     };
-    if (authUser) {
+    if (token) {
       fetchJobsAdmin();
     }
-  }, [dispatch, token, authUser]);
+  }, [dispatch, token]);
 }
 
 export default useGetJobsAdmin;

@@ -12,9 +12,9 @@ export const registerCompany = async (req, res) => {
       return sendResponse(res, 400, null, "Company Name Is Required");
     }
 
-    let company = await Company.findOne({ name: companyName });
+    let company = await Company.findOne({ name: { $regex: new RegExp(`^${companyName}$`, 'i') } });
     if (company) {
-      return sendResponse(res, 400, null, "You Can't Register Same Comapany");
+      return sendResponse(res, 400, null, "This company name already exists.");
     }
 
     company = await Company.create({
@@ -25,6 +25,9 @@ export const registerCompany = async (req, res) => {
     return sendResponse(res, 201, company, "Company Registered Successfully");
   } catch (error) {
     console.error("Error registering company:", error); // Changed to console.error for better logging
+    if (error.code === 11000) {
+      return sendResponse(res, 400, null, "This company name already exists.");
+    }
     return sendResponse(res, 500, null, "Internal Server Error");
   }
 };
@@ -95,7 +98,18 @@ export const updateCompany = async (req, res) => {
     }
 
     // Update company fields only if they exist in the request body
-    if (name) company.name = name;
+    if (name && name !== company.name) {
+      // Check if the new name is already taken by another company
+      let existingCompany = await Company.findOne({ 
+        name: { $regex: new RegExp(`^${name}$`, 'i') }, 
+        _id: { $ne: companyId } 
+      });
+      if (existingCompany) {
+        return sendResponse(res, 400, null, "This company name already exists.");
+      }
+      company.name = name;
+    }
+    
     if (description) company.description = description;
     if (website) company.website = website;
     if (location) company.location = location;
@@ -107,6 +121,9 @@ export const updateCompany = async (req, res) => {
     return sendResponse(res, 200, company, "Company Updated Successfully");
   } catch (error) {
     console.error("Error updating company:", error);
+    if (error.code === 11000) {
+      return sendResponse(res, 400, null, "This company name already exists.");
+    }
     return sendResponse(
       res,
       500,

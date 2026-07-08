@@ -8,7 +8,7 @@ import { JOB_API_END_POINT } from "../utils/constant.js";
 function useGetAllJobs() {
   const dispatch = useDispatch();
   const { searchedQuery } = useSelector((store) => store.job);
-  const { authUser, token } = useSelector((store) => store.auth);
+  const { token } = useSelector((store) => store.auth);
 
   useEffect(() => {
     const getJobs = async () => {
@@ -35,7 +35,7 @@ function useGetAllJobs() {
       }
     };
     getJobs();
-  }, [dispatch, searchedQuery, token, authUser]);
+  }, [dispatch, searchedQuery, token]);
 }
 
 export default useGetAllJobs;

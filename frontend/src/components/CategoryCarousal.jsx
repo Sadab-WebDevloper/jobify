@@ -6,30 +6,36 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setSearchedQuery } from "../redux/jobSlice";
-
-const category = [
-  "Frontend Developer",
-  "Backend Developer",
-  "Data Science",
-  "Graphic Designer",
-  "FullStack Developer",
-];
+import { useMemo } from "react";
 
 function CategoryCarousal() {
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
+  const { allJobs } = useSelector((state) => state.job);
+
+  const category = useMemo(() => {
+    if (!allJobs || allJobs.length === 0) {
+      return [
+        "Frontend Developer",
+        "Backend Developer",
+        "Data Science",
+        "Graphic Designer",
+        "FullStack Developer",
+      ];
+    }
+    return [...new Set(allJobs.map((job) => job.title))];
+  }, [allJobs]);
+
   const searchJobHandler = (query) => {
     dispatch(setSearchedQuery(query));
-    if (query) {
-      navigate("/browse");
-    }
   };
   return (
-    <div className="relative py-12 animate-fade-in-up bg-slate-900" style={{ animationDelay: '0.5s' }}>
-      <Carousel className="w-full max-w-xl mx-auto my-10 relative z-10">
+    <div className="relative pt-12 pb-2 animate-fade-in-up bg-slate-900" style={{ animationDelay: '0.5s' }}>
+      <Carousel className="w-full max-w-xl mx-auto my-4 relative z-10">
         <CarouselContent>
           {category.map((cat, index) => (
             <CarouselItem

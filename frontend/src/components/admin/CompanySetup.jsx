@@ -78,7 +78,8 @@ function CompanySetup() {
       }
     } catch (error) {
       console.error(error);
-      setError("Something went wrong. Please try again.");
+      const errorMsg = error.response?.data?.message || "Something went wrong. Please try again.";
+      setError(errorMsg);
     } finally {
       setLoading(false);
     }

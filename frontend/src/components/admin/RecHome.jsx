@@ -1,11 +1,21 @@
 import { useNavigate } from "react-router-dom";
 import NewsletterSection from "../HomePagecom/NewsletterSection";
+import useGetAllCompanies from "../../hooks/useGetAllCompanies";
+import { useSelector } from "react-redux";
+
 // RecruiterHeroSection Component
 const RecruiterHeroSection = () => {
   const navigate = useNavigate();
+  const { allCompanies } = useSelector((state) => state.company);
 
-  const handlePostJob = () => {
-    navigate("/admin/companies");
+  const hasCompanies = allCompanies && allCompanies.length > 0;
+
+  const handleAction = () => {
+    if (hasCompanies) {
+      navigate("/admin/jobs/create");
+    } else {
+      navigate("/admin/companies/create");
+    }
   };
 
   return (
@@ -24,10 +34,10 @@ const RecruiterHeroSection = () => {
           the best candidates all in one place.
         </p>
         <button
-          onClick={handlePostJob}
+          onClick={handleAction}
           className="mt-10 bg-gradient-to-r from-teal-500 to-emerald-500 px-8 py-4 rounded-full text-lg font-bold hover:from-teal-400 hover:to-emerald-400 hover:-translate-y-1 hover:shadow-lg hover:shadow-teal-500/25 transition-all"
         >
-          Add Your Company
+          {hasCompanies ? "Post a New Job" : "Add Your Company"}
         </button>
       </div>
     </div>
@@ -117,6 +127,8 @@ const FeaturedCandidates = () => {
 
 // HomeRecruiter Component
 const HomeRecruiter = () => {
+  useGetAllCompanies(); // Fetch companies so Redux state is populated
+
   return (
     <>
       <RecruiterHeroSection />

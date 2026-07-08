@@ -6,7 +6,7 @@ import apiRequest from "../utils/axiosUtility";
 import { setApiLoading } from "../redux/authSlice";
 
 function useGetAllCompanies() {
-  const { token, authUser } = useSelector((store) => store.auth);
+  const { token } = useSelector((store) => store.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,10 +30,10 @@ function useGetAllCompanies() {
       }
     };
 
-    if (authUser) {
+    if (token) {
       fetchAllCompanies();
     }
-  }, [token, authUser, dispatch]);
+  }, [token, dispatch]);
 }
 
 export default useGetAllCompanies;

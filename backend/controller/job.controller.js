@@ -62,14 +62,22 @@ export const postJob = async (req, res) => {
 export const getAllJobs = async (req, res) => {
   try {
     const keyword = req.query.keyword || "";
+    
+    // Find matching companies based on the keyword
+    const matchedCompanies = await Company.find({
+      name: { $regex: keyword, $options: "i" }
+    }).select("_id");
+    const companyIds = matchedCompanies.map((company) => company._id);
+
     const query = {
       $or: [
         { title: { $regex: keyword, $options: "i" } },
-        { description: { $regex: keyword, $options: "i" } },
+        { requirements: { $regex: keyword, $options: "i" } },
+        { company: { $in: companyIds } }
       ],
     };
 
-    const jobs = await Job.find(query).populate("company");
+    const jobs = await Job.find(query).populate("company").sort({ createdAt: -1 });
 
     return sendResponse(res, 200, jobs.length ? jobs : null, "Jobs Found");
   } catch (error) {

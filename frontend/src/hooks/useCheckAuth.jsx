@@ -6,7 +6,8 @@ import apiRequest from "../utils/axiosUtility";
 
 function useCheckAuth() {
   const dispatch = useDispatch();
-  const { token, authUser } = useSelector((store) => store.auth);
+  const { token } = useSelector((store) => store.auth);
+  
   useEffect(() => {
     const checkAuth = async () => {
       try {
@@ -24,10 +25,10 @@ function useCheckAuth() {
       }
     };
 
-    if (authUser) {
+    if (token) {
       checkAuth();
     }
-  }, [dispatch, token, authUser]);
+  }, [dispatch, token]);
 }
 
 export default useCheckAuth;
